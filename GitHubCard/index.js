@@ -1,15 +1,18 @@
 const { default: Axios } = require("axios");
-
+import axios from "axios";
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
-Axios.get("https://api.github.com/users/AftonSlone")
+axios
+  .get("https://api.github.com/users/AftonSlone")
   .then((res) => {
     document.querySelector(".cards").appendChild(cardMaker(res.data));
   })
-  .catch((err) => {});
+  .catch((err) => {
+    console.log(err);
+  });
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -81,8 +84,7 @@ function cardMaker(gitHubData) {
   card.classList.add("card");
   cardInfo.classList.add("card-info");
   realName.classList.add("name");
-  login.classList.add("username");
-
+  userName.classList.add("username");
   avatar.src = avatar_url;
   realName.textContent = name;
   userName.textContent = login;
@@ -102,7 +104,7 @@ function cardMaker(gitHubData) {
   cardInfo.appendChild(userFollowers);
   cardInfo.appendChild(userFollowing);
   cardInfo.appendChild(userBio);
-  console.log(avatar);
+  return card;
 }
 /*
   List of LS Instructors Github username's:
