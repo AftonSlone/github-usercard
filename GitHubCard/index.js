@@ -1,9 +1,15 @@
+const { default: Axios } = require("axios");
+
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
-
+Axios.get("https://api.github.com/users/AftonSlone")
+  .then((res) => {
+    document.querySelector(".cards").appendChild(cardMaker(res.data));
+  })
+  .catch((err) => {});
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -49,7 +55,55 @@ const followersArray = [];
       </div>
     </div>
 */
+function cardMaker(gitHubData) {
+  const {
+    avatar_url,
+    name,
+    login,
+    followers,
+    following,
+    location,
+    html_url,
+    bio,
+  } = gitHubData;
+  const card = document.createElement("div");
+  const avatar = document.createElement("img");
+  const cardInfo = document.createElement("div");
+  const realName = document.createElement("h3");
+  const userName = document.createElement("p");
+  const userLocation = document.createElement("p");
+  const profile = document.createElement("p");
+  const link = document.createElement("a");
+  const userFollowers = document.createElement("p");
+  const userFollowing = document.createElement("p");
+  const userBio = document.createElement("p");
 
+  card.classList.add("card");
+  cardInfo.classList.add("card-info");
+  realName.classList.add("name");
+  login.classList.add("username");
+
+  avatar.src = avatar_url;
+  realName.textContent = name;
+  userName.textContent = login;
+  userLocation.textContent = location;
+  link.src = html_url;
+  userFollowers.textContent = followers;
+  userFollowing.textContent = following;
+  userBio.textContent = bio;
+
+  card.appendChild(avatar);
+  card.appendChild(cardInfo);
+  cardInfo.appendChild(realName);
+  cardInfo.appendChild(userName);
+  cardInfo.appendChild(userLocation);
+  cardInfo.appendChild(profile);
+  profile.appendChild(link);
+  cardInfo.appendChild(userFollowers);
+  cardInfo.appendChild(userFollowing);
+  cardInfo.appendChild(userBio);
+  console.log(avatar);
+}
 /*
   List of LS Instructors Github username's:
     tetondan
