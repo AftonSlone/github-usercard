@@ -46,7 +46,7 @@ const followersArray = [
 ];
 followersArray.forEach((lnk) => {
   axios
-    .get("https://api.github.com/users/"`${followersArray[lnk]}`)
+    .get(`https://api.github.com/users/${[lnk]}`)
     .then((res) => {
       document.querySelector(".cards").appendChild(cardMaker(res.data));
       console.log(res);
